@@ -19,7 +19,6 @@ $signupFirstNameError = "";
 $signupUsername = "";
 $signupLastName = "";
 $signupLastNameError = "";
-$loginUsername = "";
 //kas on üldse olemas selline muutuja
 if(isset($_POST["signupEmail"])){
 	//jah on olemas
@@ -99,11 +98,11 @@ if ( isset($_POST["signupEmail"]) &&
 signUp($signupUsername, $password, $signupEmail, $signupFirstName, $signupLastName);
 }
 $notice = "";
-if (isset($_POST["loginUsername"]) && isset($_POST["loginPassword"]) && 
-	!empty($_POST["loginUsername"]) && !empty($_POST["loginPassword"]))
+if (isset($_POST["loginEmail"]) && isset($_POST["loginPassword"]) && 
+	!empty($_POST["loginEmail"]) && !empty($_POST["loginPassword"]))
 	{
-//ei pea olema sama nimi mis function.php-s. Seal on $error mitte $notice
-	$notice = login($_POST["loginUsername"], $_POST["loginPassword"]);
+//ei pea olema sama nimi mis function.php-s. Seal on $error
+	$notice = login($_POST["loginEmail"], $_POST["loginPassword"]);
 }
 
 ?>
@@ -119,7 +118,8 @@ if (isset($_POST["loginUsername"]) && isset($_POST["loginPassword"]) &&
 	<h1>Logi sisse</h1>
 	<form method="POST">
 		<p style="color:red;"><?=$notice;?></p>
-		<input name="loginUsername" placeholder="Kasutajanimi" type="text"> <br><br>
+		<label>E-mail</label> <br>
+		<input name="loginEmail" type="text"> <br><br>
 		<input name="loginPassword" placeholder="Parool" type="password"> <br><br>
 		<input type="submit" value="Logi sisse">
 	

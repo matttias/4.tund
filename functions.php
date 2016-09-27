@@ -50,7 +50,7 @@ function signUp($signupUsername, $password, $signupEmail, $signupFirstName, $sig
 	}
 
 
-function login($loginUsername, $password) {
+function login($email, $password) {
 	
 	$error = "";
 	
@@ -60,12 +60,12 @@ function login($loginUsername, $password) {
 		$stmt = $mysqli->prepare("
 		SELECT id, username, password, email, firstname, lastname, created
 		FROM login
-		WHERE username = ?");
+		WHERE email = ?");
 		
 		echo $mysqli->error;
 		
 		//asendan küsimärgi
-		$stmt->bind_param("s", $username);
+		$stmt->bind_param("s", $email);
 		
 		//määrna väärtused muutujasse
 		$stmt->bind_result($id, $usernameFromDB, $passwordFromDB,  $emailFromDB, $firstnameFromDB, $lastnameFromDB, $created);
@@ -95,7 +95,7 @@ function login($loginUsername, $password) {
 			
 		} else {
 			//ei ole sellist kasutajat selle meiliga
-			$error = "Ei ole sellist kasutajat";
+			$error = "Ei ole sellist e-maili";
 		}
 	
 		return $error;
