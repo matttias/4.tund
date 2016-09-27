@@ -19,6 +19,9 @@ $signupFirstNameError = "";
 $signupUsername = "";
 $signupLastName = "";
 $signupLastNameError = "";
+
+$loginEmailError = "";
+$loginPasswordError = "";
 //kas on üldse olemas selline muutuja
 if(isset($_POST["signupEmail"])){
 	//jah on olemas
@@ -103,6 +106,9 @@ if (isset($_POST["loginEmail"]) && isset($_POST["loginPassword"]) &&
 	{
 //ei pea olema sama nimi mis function.php-s. Seal on $error
 	$notice = login($_POST["loginEmail"], $_POST["loginPassword"]);
+} else {
+	$loginEmailError = "Sisselogimiseks peab sisestama e-maili";
+	$loginPasswordError = "Sisselogimiseks peab sisetama parooli";
 }
 
 ?>
@@ -119,8 +125,8 @@ if (isset($_POST["loginEmail"]) && isset($_POST["loginPassword"]) &&
 	<form method="POST">
 		<p style="color:red;"><?=$notice;?></p>
 		<label>E-mail</label> <br>
-		<input name="loginEmail" type="text"> <br><br>
-		<input name="loginPassword" placeholder="Parool" type="password"> <br><br>
+		<input name="loginEmail" type="text"> <?php echo $loginEmailError; ?> <br><br>
+		<input name="loginPassword" placeholder="Parool" type="password"> <?php echo $loginPasswordError; ?> <br><br>
 		<input type="submit" value="Logi sisse">
 	
 	</form>
